@@ -46,12 +46,6 @@ export default function RootLayout({
             },
           }}
         >
-          <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          {/*<SignedIn>*/}
-          {/*  <UserButton />*/}
-          {/*</SignedIn>*/}
           <ThemeProvider>{children}</ThemeProvider>
         </ClerkProvider>
       </body>
