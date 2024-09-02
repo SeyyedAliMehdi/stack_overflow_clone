@@ -48,6 +48,32 @@ export default function Home() {
       answers: [{}, {}, {}], // Assuming three answers
       createdAt: new Date("2021-09-01T12:00:00.000Z"),
     },
+    {
+      _id: "4",
+      title: "Best practices for React components?",
+      tags: [
+        { _id: "2", name: "react" },
+        { _id: "5", name: "best practices" },
+      ],
+      author: { _id: "103", name: "Alice Brown", picture: "alice.jpg" },
+      upvotes: 300,
+      views: 1200,
+      answers: [{}, {}, {}], // Assuming three answers
+      createdAt: new Date("2021-09-01T12:00:00.000Z"),
+    },
+    {
+      _id: "5",
+      title: "Best practices for React components?",
+      tags: [
+        { _id: "2", name: "react" },
+        { _id: "5", name: "best practices" },
+      ],
+      author: { _id: "103", name: "Alice Brown", picture: "alice.jpg" },
+      upvotes: 300,
+      views: 1200,
+      answers: [{}, {}, {}], // Assuming three answers
+      createdAt: new Date("2021-09-01T12:00:00.000Z"),
+    },
   ];
 
   return (
