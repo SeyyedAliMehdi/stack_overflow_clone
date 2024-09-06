@@ -33,6 +33,7 @@ const Question = ({ mongoUserId }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
@@ -45,8 +46,6 @@ const Question = ({ mongoUserId }: Props) => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof QuestionSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     setIsSubmitting(true);
     try {
       // make an async call to our API -> create a question
@@ -56,11 +55,12 @@ const Question = ({ mongoUserId }: Props) => {
         content: values.explanation,
         tags: values.tags,
         author: JSON.parse(mongoUserId),
+        path: pathname,
       });
-      // contain all form data
-      // navigate to home page
+
       router.push("/");
     } catch (error) {
+      // TODO: Make a toast if an error occurred during posting a question
     } finally {
       setIsSubmitting(false);
     }

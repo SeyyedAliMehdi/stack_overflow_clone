@@ -1,5 +1,6 @@
 import { Schema, models, model, Document } from "mongoose";
 
+// Define the interface
 export interface IQuestion extends Document {
   title: string;
   content: string;
@@ -8,22 +9,25 @@ export interface IQuestion extends Document {
   upvotes: Schema.Types.ObjectId[];
   downvotes: Schema.Types.ObjectId[];
   author: Schema.Types.ObjectId;
-  answer: Schema.Types.ObjectId[];
+  answers: Schema.Types.ObjectId[];
   createdAt: Date;
 }
 
-const QuestionSchema = new Schema({
+// Define the schema
+const QuestionSchema = new Schema<IQuestion>({
   title: { type: String, required: true },
   content: { type: String, required: true },
-  tags: { type: Schema.Types.ObjectId, ref: "Tag" },
+  tags: [{ type: Schema.Types.ObjectId, ref: "Tag" }],
   views: { type: Number, default: 0 },
-  upvotes: { type: Schema.Types.ObjectId, ref: "User" },
-  downvotes: { type: Schema.Types.ObjectId, ref: "User" },
-  author: { type: Schema.Types.ObjectId, ref: "User" },
-  answer: { type: Schema.Types.ObjectId, ref: "Answer" },
+  upvotes: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  downvotes: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  author: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  answers: [{ type: Schema.Types.ObjectId, ref: "Answer" }],
   createdAt: { type: Date, default: Date.now },
 });
 
-const Question = models.Question || model("Question", QuestionSchema);
+// Create or retrieve the model
+const Question =
+  models.Question || model<IQuestion>("Question", QuestionSchema);
 
 export default Question;

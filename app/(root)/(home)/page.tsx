@@ -6,75 +6,10 @@ import { HomePageFilters } from "@/constants/filter";
 import HomeFilter from "@/components/home/HomeFilter";
 import NoResult from "@/components/shared/NoResult";
 import QuestionCard from "@/components/cards/QuestionCard";
+import { getQuestions } from "@/lib/actions/question.action";
 
-export default function Home() {
-  const questions = [
-    {
-      _id: "1",
-      title: "How to center a div?",
-      tags: [
-        { _id: "1", name: "python" },
-        { _id: "2", name: "react" },
-      ],
-      author: { _id: "101", name: "John Doe", picture: "john.jpg" },
-      upvotes: 187,
-      views: 1000,
-      answers: [{}, {}], // Assuming each answer is an object
-      createdAt: new Date("2021-09-01T12:00:00.000Z"),
-    },
-    {
-      _id: "2",
-      title: "How to connect to a SQL database?",
-      tags: [
-        { _id: "3", name: "sql" },
-        { _id: "4", name: "database" },
-      ],
-      author: { _id: "102", name: "Jane Smith", picture: "jane.jpg" },
-      upvotes: 200,
-      views: 500,
-      answers: [{}], // Assuming one answer
-      createdAt: new Date("2021-09-01T12:00:00.000Z"),
-    },
-    {
-      _id: "3",
-      title: "Best practices for React components?",
-      tags: [
-        { _id: "2", name: "react" },
-        { _id: "5", name: "best practices" },
-      ],
-      author: { _id: "103", name: "Alice Brown", picture: "alice.jpg" },
-      upvotes: 300,
-      views: 1200,
-      answers: [{}, {}, {}], // Assuming three answers
-      createdAt: new Date("2021-09-01T12:00:00.000Z"),
-    },
-    {
-      _id: "4",
-      title: "Best practices for React components?",
-      tags: [
-        { _id: "2", name: "react" },
-        { _id: "5", name: "best practices" },
-      ],
-      author: { _id: "103", name: "Alice Brown", picture: "alice.jpg" },
-      upvotes: 300,
-      views: 1200,
-      answers: [{}, {}, {}], // Assuming three answers
-      createdAt: new Date("2021-09-01T12:00:00.000Z"),
-    },
-    {
-      _id: "5",
-      title: "Best practices for React components?",
-      tags: [
-        { _id: "2", name: "react" },
-        { _id: "5", name: "best practices" },
-      ],
-      author: { _id: "103", name: "Alice Brown", picture: "alice.jpg" },
-      upvotes: 300,
-      views: 1200,
-      answers: [{}, {}, {}], // Assuming three answers
-      createdAt: new Date("2021-09-01T12:00:00.000Z"),
-    },
-  ];
+export default async function Home() {
+  const result = await getQuestions({});
 
   return (
     <>
@@ -104,9 +39,9 @@ export default function Home() {
       </div>
       <HomeFilter />
 
-      {questions.length > 0 ? (
+      {result.questions.length > 0 ? (
         <div className="w-full mt-10 flex flex-col gap-6">
-          {questions.map((question) => (
+          {result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
