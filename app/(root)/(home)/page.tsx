@@ -39,9 +39,9 @@ export default async function Home() {
       </div>
       <HomeFilter />
 
-      {result.questions.length > 0 ? (
+      {result!.questions.length > 0 ? (
         <div className="w-full mt-10 flex flex-col gap-6">
-          {result.questions.map((question) => (
+          {result!.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
